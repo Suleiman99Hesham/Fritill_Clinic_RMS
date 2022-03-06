@@ -57,6 +57,7 @@ $ pip3 --version
 ```
 If not so please download it from here
 > [Download python](https://www.python.org/downloads/)
+
 > [Download pip](https://pip.pypa.io/en/stable/installation/)
 
 If you are an ubuntu user, do the following commands
@@ -81,7 +82,9 @@ $ sudo apt install -y python3-venv
 3. **_install postgreSQL and configure it with the same credentails in `Settings.py` file_**
 
 > [PostgreSQL: Download](https://www.postgresql.org/download/)
+
 > [How to set up Postgres in your Django project](https://dev.to/mungaigikure/how-to-set-up-postgres-in-your-django-project-575i)
+
 > [Databases | Django Documentation](https://docs.djangoproject.com/en/4.0/ref/databases/)
 
 <hr>
@@ -199,9 +202,10 @@ Open [http://localhost:8000](http://localhost:8000) to use the app.
 
 ## The Available endpoints that are provided by our API
 
-<br>
 
 ### Client endpoints
+
+<br>
 
 **_Creating a new client_**
 ```sh
@@ -271,6 +275,8 @@ http://localhost:8000/api/deleteClient/<int:id>/
 <hr>
 
 ### Appointments endpoints
+
+<br>
 
 **_Get all appointments (only admin allowed)_**
 ```sh
