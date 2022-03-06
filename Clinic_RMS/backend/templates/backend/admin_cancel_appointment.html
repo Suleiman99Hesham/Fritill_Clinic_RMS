@@ -1,0 +1,18 @@
+{% extends 'backend/main.html' %}
+{% load static %}
+
+{% block content %}
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+                <div class="card card-body">
+                <p>Are you sure you want to Cancel " {{ appointment}} "</p>
+                <form action="{% url 'admin_cancel_appointment' appointment.id %}" method="POST" >
+                    {% csrf_token %}
+                    <a class="btn btn-warning" href=" {% url 'admin_dashboard'%} ">Cancel</a>
+                    <input class="btn btn-danger" type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

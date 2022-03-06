@@ -1,0 +1,72 @@
+{%  extends 'backend/main.html' %}
+
+{% block content %}
+
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="GET" class=".form-inline">
+				{{myFilter.form}}
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>
+	</div>
+	
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>client</th>
+                    <th>Reservation Date</th>
+                    <th>Status</th>
+					<th>Approved</th>
+					<th>Missed</th>
+					<th>finished</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+				</tr>
+				{% for appointment in appointments %}
+					<tr>
+                        <th>{{appointment.client.name}}</th>
+                        <th> {{ appointment.date }} </th>
+                        <th> {{ appointment.status }} </th>
+						<th>
+							{% if appointment.approved == True %}
+								<p>Approved</p>
+							{% else %}
+								<p>Waiting</p>
+							{% endif %}
+						</th>
+						<th>
+							{% if appointment.missed == True %}
+								<p>Missed</p>
+							{% else %}
+								<p>Not Missed</p>
+							{% endif %}
+						</th>
+						<th>
+							{% if appointment.finished == True %}
+								<p>Finished</p>
+							{% else %}
+								<p>Not Finished</p>
+							{% endif %}
+						</th>
+						{% if appointment.status != 'Passed'%}
+						<th> <a class='btn btn-sm btn-info' href="{% url 'modify_appointment' appointment.id%}">Update</a> </th>
+						{% else %}
+							<th></th>
+						{%endif%}
+						<th> <a class='btn btn-sm btn-danger'href="{% url 'admin_cancel_appointment' appointment.id %}">Remove</a></th>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

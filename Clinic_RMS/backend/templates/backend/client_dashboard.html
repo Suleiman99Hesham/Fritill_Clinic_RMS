@@ -1,0 +1,47 @@
+{% extends 'backend/main.html' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'client_reserve_appointment' %}">Reserve appointment</a>
+			<br>
+			<table class="table table-sm">
+				<thead class="thead-light">
+					<tr>
+						<th>Reservation Date</th>
+						<th>Status</th>
+						<th>Reschedule</th>
+						<th>Cancel</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for appointment in appointments %}
+						<tr>
+							<th> {{ appointment.date }} </th>
+							<th>
+								{% if appointment.status == 'New' or appointment.status == 'Rescheduled' %}
+									{% if appointment.approved == True %}
+										<p>Approved</p>
+									{% else %}
+									<p>Waiting to be approved</p>
+									{% endif %}
+								{% else %}
+								<p>Closed</p>
+								{% endif %}
+							</th>
+							{% if appointment.status != 'Passed'%}
+								<th> <a class='btn btn-sm btn-info' href="{% url 'client_reschedule_appointment' appointment.id %}">Reschedule</a> </th>
+								<th> <a class='btn btn-sm btn-danger'href="{% url 'client_cancel_appointment' appointment.id %}">Cancel</a></th>
+							{% else %}
+								<th></th>
+								<th></th>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,71 @@
+{%  extends 'backend/main.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="row">
+	<div class="col-md-5">
+		<h5>Clients:</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<thead class="thead-light">
+					<tr>
+						<th>Clients</th>
+						<th>Email</th>
+						<th></th>
+					</tr>
+				</thead>
+				{% for client in clients %}
+				<tr>
+					<th>{{ client }}</th>
+					<th>{{client.email}}</th>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>LAST 5 Appoimtments</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<thead class="thead-light">
+					<tr>
+						<th>client</th>
+						<th>Reservation Date</th>
+						<th>Status</th>
+						<th>Approved</th>
+						<th>Update</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+					{% for appointment in last_appointments %}
+					<tr>
+					<th>{{appointment.client.name}}</th>
+					<th> {{ appointment.date }} </th>
+					<th> {{ appointment.status }} </th>
+					<th>
+						{% if appointment.approved == True %}
+							<p>Approved</p>
+						{% else %}
+							<p>Waiting</p>
+						{% endif %}
+					</th>
+					{% if appointment.status != 'Passed'%}
+						<th> <a class='btn btn-sm btn-info' href="{% url 'modify_appointment' appointment.id%}">Update</a> </th>
+					{% else %}
+						<th></th>
+					{%endif%}
+					<th> <a class='btn btn-sm btn-danger'href="{% url 'admin_cancel_appointment' appointment.id %}">Remove</a></th>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
