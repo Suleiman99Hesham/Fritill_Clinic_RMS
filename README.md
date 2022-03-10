@@ -17,6 +17,7 @@
   - [The Available endpoints that are provided by our API](#the-available-endpoints-that-are-provided-by-our-api)
     - [Client endpoints](#client-endpoints)
     - [Appointments endpoints](#appointments-endpoints)
+  - [BackLog](#backlog)
 
 <hr>
 
@@ -207,19 +208,21 @@ Open [http://localhost:8000](http://localhost:8000) to use the app.
 
 <br>
 
-**_Creating a new client_**
+**_POST / Creating a new client_**
 ```sh
 http://localhost:8000/api/clientCreate/
 ```
+> - Request Method: POST
 > - The request body should include (name, email, password)
 > - The response body would have the client data if it's ceated successfully
 
 <br>
 
-**_Login with Client credentials_**
+**_GET / Login with Client credentials_**
 ```sh
 http://localhost:8000/api/GetToken/
 ```
+> - Request Method: GET
 > - Get a `JWT` token for a client to authenticate given his username and password in request body
 > - The response body would have the user access and refresh tokens
 > - `Access token`: used to authenticate the user and it must be send with every request that require client to be authenticated and it has to be refreshed every 5 minutes with `Refresh token` 
@@ -227,48 +230,53 @@ http://localhost:8000/api/GetToken/
 
 <br>
 
-**_Get new tokens_**
+**_GET / Get new tokens_**
 ```sh
 http://localhost:8000/api/GetToken/refresh/
 ```
+> - Request Method: GET
 > - The request body should include the `Access token`
 > - it Refreshs the `Access token` for client
 > - The response body would have a new `Access token` and a new `Refresh token`
 
 <br>
 
-**_Get all clients (only admin allowed)_**
+**_GET / Get all clients (only admin allowed)_**
 ```sh
 http://localhost:8000/api/getAllClients/
 ```
+> - Request Method: GET
 > - The request body should include the `Access token`
 > - The response body would have all clients data on the system
 
 <br>
 
-**_Get a client by ID_**
+**_GET / Get a client by ID_**
 ```sh
 http://localhost:8000/api/getClientById/<int:id>/
 ```
+> - Request Method: GET
 > - The request body should include the `Access token`
 > - The response body would have the client data
 
 <br>
 
-**_Update a client_**
+**_PUT / Update a client_**
 ```sh
 http://localhost:8000/api/updateClient/<int:id>/
 ```
+> - Request Method: PUT
 > - The request body should include the `Access token`
 > - The request body should have the new specefied data that you want to update
 > - The response body would have the client data with the new data
 
 <br>
 
-**_Delete a client (only admin allowed)_**
+**_DELETE / Delete a client (only admin allowed)_**
 ```sh
 http://localhost:8000/api/deleteClient/<int:id>/
 ```
+> - Request Method: DELETE
 > - The request body should include the `Access token`
 > - The response body would have a message tells you that the client is deleted successfully 
 
@@ -278,65 +286,95 @@ http://localhost:8000/api/deleteClient/<int:id>/
 
 <br>
 
-**_Get all appointments (only admin allowed)_**
+**_GET / Get all appointments (only admin allowed)_**
 ```sh
 http://localhost:8000/api/getAllAppointments/
 ```
+> - Request Method: GET
 > - The request body should include the `Access token`
 > - The response body would have all appointments data on the system
 
 <br>
 
-**_Get a appointment by ID_**
+**_GET / Get a appointment by ID_**
 ```sh
 http://localhost:8000/api/getAppointmentsById/<int:id>/
 ```
+> - Request Method: GET
 > - The request body should include the `Access token`
 > - The response body would have the appointment data
 
 <br>
 
-**_Get all appointments of a client (only admin allowed)_**
+**_GET / Get all appointments of a client (only admin allowed)_**
 ```sh
 http://localhost:8000/api/getAppointmentsByClient_admin/<int:id>/
 ```
+> - Request Method: GET
 > - The request body should include the `Access token`
 > - On trying to prevent any client from getting the appointments of another client we permit this endpoint only for admin user
 > - The response body would have the appointments of the specified client with his id
 
 <br>
 
-**_Get all appointments of authenticated client_**
+**_GET / Get all appointments of authenticated client_**
 ```sh
 http://localhost:8000/api/getApointmentsByClient/
 ```
+> - Request Method: GET
 > - The request body should include the `Access token`
 > - The response body would have the appointments of the authenticated client
 
 <br>
 
-**_Creating a new appointment_**
+**_POST / Creating a new appointment_**
 ```sh
 http://localhost:8000/api/createAppointment/
 ```
+> - Request Method: POST
 > - The request body should include (appointment date: datetime field)
 > - The response body would have the appointment data if it's ceated successfully
 
 <br>
 
-**_Update an appointment_**
+**_PUT / Update an appointment_**
 ```sh
 http://localhost:8000/api/updateAppointment/<int:id>/
 ```
+> - Request Method: PUT
 > - The request body should include the `Access token`
 > - The request body should have the new appointment date
 > - The response body would have the appointment data
 
 <br>
 
-**_Delete an appointment (only admin allowed)_**
+**_DELETE / Delete an appointment (only admin allowed)_**
 ```sh
 http://localhost:8000/api/deleteAppointment/<int:id>/
 ```
+> - Request Method: DELETE
 > - The request body should include the `Access token`
 > - The response body would have a message tells you that the appointment is deleted successfully
+
+<hr>
+
+## BackLog
+
+- [x] ~Created project and setup virtual enviroment~
+- [x] ~Installed and configured PostgreSQL database instead of using default sqlite3~
+- [x] ~Implemented user authentication functions (login - signup)~
+- [x] ~Implemented the functionality of getting password back (forget password operation)~
+- [x] ~Built admin dashboard to let him view and manage site data~
+- [x] ~Viewed a list of all appointments with the ability to delete and modify appointments~
+- [x] ~Viewed a list of past appointments with the ability to delete them~
+- [x] ~Viewed a list of upcoming appointments with all details~
+- [x] ~Viewed a list of rescheduled requests of appointments to approve or refuse them~
+- [x] ~Created a filter search bar to improve search operations, search by (from date / to date - status - client)~
+- [x] ~Created the client dashboard to list all his appointment~
+- [x] ~Built reservation form to let the client make a reservation~
+- [x] ~Developed the API and create endpoints for the system functionalities through Django Rest Framework~
+- [x] ~Applied PIP8 standards, made project code readable, and wrote comments~
+- [x] ~Integrated Celery and Redis within my project to notify the client of his appointment before its date by 24, 6, or 0 hours~
+- [ ] write unit tests functions
+- [ ] Decrize the project (make a docker image for it)
+- [ ] Host the project on Heroku
