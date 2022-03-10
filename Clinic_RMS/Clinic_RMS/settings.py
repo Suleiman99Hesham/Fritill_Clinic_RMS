@@ -63,10 +63,10 @@ REST_FRAMEWORK = {
     )
 }
 
-# Jason Web Token configuration to handle user authentication
+# Json Web Token configuration to handle user authentication
 SIMPLE_JWT = {
 
-    # The expiration time of access token which is always used to suthenticate the user credentials
+    # The expiration time of access token which is always used to authenticate the user credentials
     # It' always required to use all system features
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
 
